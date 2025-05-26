@@ -17,7 +17,6 @@
     </style>
   </head>
   <body>
-    <!-- Boutons radio -->
     <label
       ><input type="radio" id="R1" name="action" /> Apparaitre/Disparaitre
       formulaire</label
@@ -29,7 +28,6 @@
       ><input type="radio" id="R4" name="action" /> Supprimer un style</label
     ><br /><br />
 
-    <!-- Formulaire -->
     <form>
       <h2>Informations Personnelles</h2>
       <label>Nom : <input type="text" name="nom" /></label><br /><br />
@@ -37,19 +35,14 @@
       <label>Age : <input type="text" name="age" /></label><br /><br />
       <button type="button" id="valider">Valider</button>
     </form>
-
-    <!-- Résultat (tableau) -->
     <div id="resultat"></div>
 
-    <!-- Script jQuery -->
     <script>
       $(document).ready(function () {
-        // 1. Apparaitre/Disparaitre formulaire
         $("#R1").click(function () {
           $("form").fadeToggle();
         });
 
-        // 2. Animer
         $("#R2").click(function () {
           $("input[name='nom']").animate({ opacity: 0.5 }, 1000);
           $("input[name='age']").animate(
@@ -58,7 +51,6 @@
           );
         });
 
-        // 3. Ajouter un style
         $("#R3").click(function () {
           $("h2").css({
             "font-style": "italic",
@@ -67,12 +59,10 @@
           });
         });
 
-        // 4. Supprimer un style
         $("#R4").click(function () {
           $("h2").removeAttr("style");
         });
 
-        // 5. Valider → tableau
         $("#valider").click(function () {
           let nom = $("input[name='nom']").val();
           let prenom = $("input[name='prenom']").val();
