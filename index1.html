@@ -1,27 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <meta charset="UTF-8" />
+    <title>Formulaire</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      form {
+        border: 1px solid black;
+        padding: 20px;
+        width: 400px;
+        margin-top: 10px;
+      }
+      table {
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
-    <h6>
-      APPARITER / DISPARAITE FORMULAIR <input type="radio" name="" id="" />
-    </h6>
-    <h6>ANIMER <input type="radio" name="" id="" /></h6>
-    <h6>AJOUER UN STYLE <input type="radio" name="" id="" /></h6>
-    <h6>SUPPRIMER UN STYLE <input type="radio" name="" id="" /></h6>
-    <form action="">
-      <fieldset>
-        <h1>information personnelles</h1>
-        <p>Nom : <input type="text" name="r1" id="" /></p>
-        <p>Prenom : <input type="text" name="r1" id="" /></p>
-        <p>Age : <input type="text" name="r1" id="" /></p>
-      </fieldset>
+    <!-- Boutons radio -->
+    <label
+      ><input type="radio" id="R1" name="action" /> Apparaitre/Disparaitre
+      formulaire</label
+    ><br />
+    <label><input type="radio" id="R2" name="action" /> Animer</label><br />
+    <label><input type="radio" id="R3" name="action" /> Ajouter un style</label
+    ><br />
+    <label
+      ><input type="radio" id="R4" name="action" /> Supprimer un style</label
+    ><br /><br />
+
+    <!-- Formulaire -->
+    <form>
+      <h2>Informations Personnelles</h2>
+      <label>Nom : <input type="text" name="nom" /></label><br /><br />
+      <label>Prénom : <input type="text" name="prenom" /></label><br /><br />
+      <label>Age : <input type="text" name="age" /></label><br /><br />
+      <button type="button" id="valider">Valider</button>
     </form>
+
+    <!-- Résultat (tableau) -->
+    <div id="resultat"></div>
+
+    <!-- Script jQuery -->
+    <script>
+      $(document).ready(function () {
+        // 1. Apparaitre/Disparaitre formulaire
+        $("#R1").click(function () {
+          $("form").fadeToggle();
+        });
+
+        // 2. Animer
+        $("#R2").click(function () {
+          $("input[name='nom']").animate({ opacity: 0.5 }, 1000);
+          $("input[name='age']").animate(
+            { height: "50px", width: "100px" },
+            1000
+          );
+        });
+
+        // 3. Ajouter un style
+        $("#R3").click(function () {
+          $("h2").css({
+            "font-style": "italic",
+            color: "blue",
+            "text-decoration": "underline",
+          });
+        });
+
+        // 4. Supprimer un style
+        $("#R4").click(function () {
+          $("h2").removeAttr("style");
+        });
+
+        // 5. Valider → tableau
+        $("#valider").click(function () {
+          let nom = $("input[name='nom']").val();
+          let prenom = $("input[name='prenom']").val();
+          let age = $("input[name='age']").val();
+
+          let tableau = `
+          <table border="1">
+            <tr>
+              <td>Nom</td><td>${nom}</td>
+            </tr>
+            <tr>
+              <td>Prénom</td><td>${prenom}</td>
+            </tr>
+            <tr>
+              <td>Age</td><td>${age}</td>
+            </tr>
+          </table>
+        `;
+
+          $("#resultat").html(tableau);
+          $("td:nth-child(even)").css("color", "red");
+        });
+      });
+    </script>
   </body>
 </html>
